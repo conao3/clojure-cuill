@@ -1,4 +1,4 @@
 (ns cuill.core)
 
-(defn run [opts]
+(defn -main [& args]
   (println "Hello, World!"))
