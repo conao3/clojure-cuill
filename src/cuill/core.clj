@@ -1,5 +1,7 @@
 (ns cuill.core
-  (:import [com.googlecode.lanterna.terminal Terminal DefaultTerminalFactory]))
+  (:import
+   [com.googlecode.lanterna TextColor]
+   [com.googlecode.lanterna.terminal Terminal DefaultTerminalFactory]))
 
 (defn -main [& args]
   ;; (println "Hello, World!")
@@ -23,5 +25,19 @@
                                        (.withRelativeRow 2)))
       (.flush terminal))
 
-    (.readInput terminal)
+    (Thread/sleep 2000)
+
+    (.setBackgroundColor terminal
+                        (.ANSI com.googlecode.lanterna.TextColor)
+                         ;; (.BLUE (.ANSI TextColor))
+                         ;; (-> TextColor (.ANSI) (.BLUE))
+                         )
+    ;; (.setForegroundColor terminal
+    ;;                      (.YELLOW (.ANSI TextColor))
+    ;;                      ;; (-> TextColor (.ANSI) (.WHITE))
+    ;;                      )
+    (.putString terminal "Hello, World!")
+    (.flush terminal)
+
+    (Thread/sleep 2000)
     (.close terminal)))
