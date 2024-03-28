@@ -1,11 +1,8 @@
-(ns cuill.core
-  (:import
-   [com.googlecode.lanterna TextColor]
-   [com.googlecode.lanterna.terminal Terminal DefaultTerminalFactory]))
+(ns cuill.core)
 
 (defn -main [& args]
   ;; (println "Hello, World!")
-  (let* [default-terminal-factory (new DefaultTerminalFactory)
+  (let* [default-terminal-factory (new com.googlecode.lanterna.terminal.DefaultTerminalFactory)
          terminal (.createTerminal default-terminal-factory)]
 
     (do
@@ -27,16 +24,15 @@
 
     (Thread/sleep 2000)
 
-    (.setBackgroundColor terminal
-                        (.ANSI com.googlecode.lanterna.TextColor)
-                         ;; (.BLUE (.ANSI TextColor))
-                         ;; (-> TextColor (.ANSI) (.BLUE))
-                         )
-    ;; (.setForegroundColor terminal
-    ;;                      (.YELLOW (.ANSI TextColor))
-    ;;                      ;; (-> TextColor (.ANSI) (.WHITE))
-    ;;                      )
-    (.putString terminal "Hello, World!")
+    (.setBackgroundColor terminal com.googlecode.lanterna.TextColor$ANSI/BLUE)
+    (.setForegroundColor terminal com.googlecode.lanterna.TextColor$ANSI/YELLOW)
+    (.putCharacter terminal \Y)
+    (.putCharacter terminal \e)
+    (.putCharacter terminal \l)
+    (.putCharacter terminal \l)
+    (.putCharacter terminal \o)
+    (.putCharacter terminal \newline)
+    (.resetColorAndSGR terminal)
     (.flush terminal)
 
     (Thread/sleep 2000)
